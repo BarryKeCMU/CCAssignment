@@ -14,7 +14,7 @@ class ListNode
    ListNode(int x) { val = x; }
 }
 
-public class ReturnKth
+public class Solution22
 {
     public static void main(String [] args)
     {
