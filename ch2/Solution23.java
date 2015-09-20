@@ -1,3 +1,12 @@
+//Solution23.java
+
+/**
+*  This class deletes a single node in the middle of a linked list.
+*
+* @author Barry Ke
+* @version: Last modified on September 20, 2015
+*/
+
 class ListNode 
 {  
    int val;
@@ -22,6 +31,7 @@ public class Solution23
         n5.next = n6;
         n6.next = null;  
         
+        //assume n3 is given as a node in the middle of a linked list.
         deleteMiddle(n3);
         System.out.println(n1.val);
         System.out.println(n1.next.val);
@@ -32,7 +42,11 @@ public class Solution23
     }
     
     
-    //assume n4 is given as a node in the middle of a linked list.
+   /**
+    * This method deletes a node in the middle of a singly linked list
+    * 
+    * @param ListNode n: a node in the middle of a linked list
+    */    
     public static void deleteMiddle(ListNode n)
     {
         ListNode temp1 = n;
