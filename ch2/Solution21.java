@@ -2,7 +2,7 @@ public class Solution21
 {
 	/**
 	 * This method takes a linked list and deletes the duplicate elements inside
-	 * Note: I did not know Hashset, so I referred to the answers in the book and figured out the solution.
+	 * Note: I did not know Hashset, so I heavily referred to the answers in the book and figured out the solution.
 	 * 
 	 * @param Node n: the first node in the linked list 
 	 */
@@ -12,19 +12,21 @@ public class Solution21
         
         Node previous = null;
         
-        if (set.contains(n.data))
+        while(n != null)
         {
-            previous.next = n.next; //skip the current one    
-        }
-        
-        else 
-        {
-            set.add(n.data);
-            previous = n;
-        }
-        
-        n = n.next; //traverse through the linked list.
-        
+	        if (set.contains(n.data))
+	        {
+	            previous.next = n.next; //skip the current one    
+	        }
+	        
+	        else 
+	        {
+	            set.add(n.data);
+	            previous = n;
+	        }
+	        
+	        n = n.next; //traverse through the linked list.
+    	}
     }
 }
 
