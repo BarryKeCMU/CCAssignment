@@ -32,7 +32,7 @@ public class Solution15
         {
             for (int i = 0; i < str1.length() - 1; i++)
             {
-                if (countDifference >= 1) return false;
+                if (countDifference > 1) return false;
                 
                 if (str1.charAt(i) == str2.charAt(i)) 
                 {   
