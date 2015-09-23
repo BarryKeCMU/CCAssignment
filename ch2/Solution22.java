@@ -31,9 +31,7 @@ public class Solution22
         n5.next = n6;
         n6.next = null;
         
-        System.out.println(n5.val);
-        System.out.println(n5.next.val);
-        returnKth(n1, 10);
+        returnKth(n1, 1); //returns the first to last element which is 6 in this case
         
     }
      
@@ -64,5 +62,6 @@ public class Solution22
             n = n.next;
             temp = temp.next;               
         }         
+        System.out.println("The kth to last element is " + n.val);
     }  
 }
