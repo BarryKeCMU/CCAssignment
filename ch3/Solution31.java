@@ -8,7 +8,7 @@
 *  
 *  The ArrayList that I will implement is shown below:
 *  
-*  |！！！！！！！！！！！！！！！！|！！！！！！！！！！！！！！！！|！！！！！！！！！！！！！！！！|
+*  |-----------|-----------|-----------|
 *     stack1    pointer1  stack2  pointer2  stack3  pointer3
 *     
 *  pointer1: keeps track of the first stack; it is an index number
