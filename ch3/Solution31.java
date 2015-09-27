@@ -1,44 +1,107 @@
 //Solution31.java
 
 /**
-*  Description: I will use an ArrayList to implement three stacks. I choose ArrayList because it can be dynamically expanded so I do 
-*  not have to worry about the size of the three stacks. Also, if I want to push an element, number 3 to the second stack for 
-*  instance, I only need to know the pointer2 and add the number at the index of (pointer2+1). At the same time, update
-*  the pointer3. If it is at the pointer1, I will need to update the pointer2 and the pointer 3. 
-*  
-*  The ArrayList that I will implement is shown below:
-*  
-*  |----------------------|----------------------|----------------------|
-*        stack1       pointer1     stack2     pointer2    stack3     pointer3
-*     
-*  pointer1: keeps track of the first stack; it is an index number
-*  pointer2: keeps track of the second stack; it is an index number
-*  pointer3: keeps track of the third stack; it is an index number; it equals ArrayList.size()-1
-*  
-*  For instance, if 3 is inserted to the first stack and 2 is inserted to the second stack, the ArrayList becomes like this:
-*  |1|2||
-*  pointer1: updated to 0;
-*  pointer2: updated to 1;
-*  pointer3: equals to ArrayList.size()-1, which is 1 in this case;
-*  
-*  
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
-*
+*  This class uses an ArrayList to simulate an array with three stacks.
 *
 * @author Barry Ke
-* @version: Last modified on September 23, 2015
+* @version: Last modified on September 27, 2015
 * Find the kth to last element
 */
 
+import java.util.*;
 
+class Solution31
+{
+    public static List <List> arrayStack = new ArrayList<>();
+    public static List <Integer> stack1 = new ArrayList<Integer>();
+    public static List <Integer> stack2 = new ArrayList<Integer>();
+    public static List <Integer> stack3 = new ArrayList<Integer>();
+
+    public Solution31()
+    {
+        arrayStack.add(stack1);
+        arrayStack.add(stack2);
+        arrayStack.add(stack3);
+    }
+    
+    public void push(int index, int data)
+    {
+        if (index == 0) arrayStack.get(0).add(data);    
+        else if (index == 1) arrayStack.get(1).add(data);
+        else if (index == 2) arrayStack.get(2).add(data);
+        else return;        
+    }
+    
+    public int peek (int index)
+    {
+        if (index == 0) 
+        {
+            return (Integer) arrayStack.get(index).get(arrayStack.get(0).size()-1);
+        }
+        else if (index == 1)
+        {
+            return (Integer) arrayStack.get(index).get(arrayStack.get(0).size()-1);
+        }
+        else if (index == 2) 
+        {
+            return (Integer) arrayStack.get(index).get(arrayStack.get(0).size()-1);
+        }
+        else
+        {
+            return -999;
+        }
+    }    
+    
+    public void pop(int index)
+    {
+        if (index == 0) 
+        {
+            arrayStack.get(index).remove(arrayStack.get(0).size()-1);
+        }
+        else if (index == 1)
+        {
+            arrayStack.get(index).remove(arrayStack.get(0).size()-1);
+        }
+        else if (index == 2) 
+        {
+            arrayStack.get(index).remove(arrayStack.get(0).size()-1);
+        }
+        else
+        {
+            return;
+        }
+    }
+    
+    public boolean empty(int index)
+    {
+        if (index == 0) 
+        {
+            return arrayStack.get(index).isEmpty();
+        }
+        else if (index == 1)
+        {
+            return arrayStack.get(index).isEmpty();
+        }
+        else if (index == 2) 
+        {
+            return arrayStack.get(index).isEmpty();
+        }
+        else
+        {
+            return true;
+        }
+    }
+    
+    public static void main(String [] args)
+    {
+        Solution31 sl = new Solution31();
+        sl.push(0,1);
+        sl.push(0,2);
+        sl.push(0,3);
+        System.out.println(sl.peek(0));
+        sl.pop(0);
+        System.out.println(sl.peek(0));
+        System.out.println(sl.empty(4));
+    }
+}
 
