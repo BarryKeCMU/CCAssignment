@@ -7,7 +7,6 @@
 *
 * @author Barry Ke
 * @version: Last modified on October 3, 2015
-* Find the kth to last element
 */
 
 //import the BitSet 
