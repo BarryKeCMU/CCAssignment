@@ -9,6 +9,7 @@
 * @version: Last modified on October 13, 2015
 */
 
+//Assume the class Node has been built.
 Node createMinimumBST(int [] a)
 {
 	return createMinimumBST(a, 0, a.length - 1);
