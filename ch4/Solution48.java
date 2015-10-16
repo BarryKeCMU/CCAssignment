@@ -10,7 +10,6 @@
 * @version: Last modified on October 15, 2015
 */
 
-
 /**
  * This method returns the first common ancestor Node of two Nodes
  * 
