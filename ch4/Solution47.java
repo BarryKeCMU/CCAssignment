@@ -1,52 +1,79 @@
+import java.util.ArrayList;
+
 //Solution47.java
 
 /**
-*  This class finds the first common ancestor of two nodes in a binary tree. 
+*  This class traverses a list of dependencies and prints out the ordering of each element in the list.
 *
-*  Notes: I did not know how to do it. I read the solution and understood the algorithm. I rewrote the codes by myself.
-*         I will definitely go back and review this question again in the future.
+*  Notes: I did not know how to do it. I asked Haibo Li for hints and I finally figured out this problem.
 *  
 * @author Barry Ke
-* @version: Last modified on October 15, 2015
+* @version: Last modified on October 23, 2015
 */
 
 
-/**
- * This method returns the first common ancestor Node of two Nodes
- * 
- * @param Node p: the first Node
- * @param Node q: the secodn Node 
- * @return the first ancestor Node
- */
-//Assume the class Node already exists
-Node findAnces(Node p, Node q)
-{
-	if (p == q) return null;
-	
-	Node ancestor = p;
-	
-	while (ancestor != null){
-		if(isOnPath(ancestor, q)){
-			return ancestor;
-		}
-		else{
-			ancestor = ancestor.parent;
-		}
-	}
-	return null;
-}
+import java.util.*;
 
-/**
- * This method takes two Nodes and decide if they are on the same path within a tree.
- * 
- * @param Node ancestor: the first Node
- * @param Node q: the secodn Node
- * @return a boolean value that shows whether the first Node and the second Node are on the same path within the given tree
- */
-boolean isOnPath(Node ancestor, Node q)
+public class Solution47
 {
-	while (ancestor != q && q != null){
-		q = q.parent;		
+	public static void main(String [] args){
+		String [] str = {"a","b","c","d","e","f"};
+		String [][] dependency = {{"d", "a"}, {"b", "f"}, {"d", "b"}, {"a", "f"}, {"c", "d"}};
+		ArrayList <String> result = sort(str, dependency);
+         
+		for (int i = 0; i < result.size(); i++){
+		    System.out.print(result.get(i) + " ");
+		}
+        
 	}
-	return q == ancestor;		
+	
+	public static ArrayList<String> sort(String [] str, String [][] dependency){
+		HashMap <String, Integer> topoHash = new HashMap <String, Integer>();
+		for (int i = 0; i < str.length; i++){
+			topoHash.put(str[i], 0);
+		}
+		
+		for (int i = 0; i < dependency.length; i++){
+			//walk through all the nodes that have incoming edges and record the number of incoming
+			//edges for each of them.
+			String temp = dependency[i][0];
+			if (topoHash.containsKey(temp)){
+				topoHash.put(temp, topoHash.get(temp) + 1);
+			}
+			//there may be some nodes that are not connected in the graph
+			else topoHash.put(temp, 1);
+		}
+		
+		
+		ArrayList <String> result = new ArrayList<String>();
+        
+		for (int i = 0; i < str.length; i++){
+			String node = findZeroIncoming(topoHash);
+           
+			if (node == null) return result;
+			
+			result.add(node);
+			
+			for (int j = 0; j < dependency.length; j++){
+				String first = dependency[j][0];
+				String second = dependency[j][1];
+				
+				//if node has outgoing edges to other nodes, reduce the number of incoming edges of the other node that the
+				//node points to by one unit and then remove the node.
+				if (node == second){
+					topoHash.put(first, topoHash.get(first) - 1);					
+				}
+			}
+			topoHash.remove(node);
+		}
+		
+		return result;
+	}
+	
+	public static String findZeroIncoming(HashMap<String, Integer> topoHash){
+		for(Map.Entry<String, Integer>  entry: topoHash.entrySet()){
+			if (entry.getValue() == 0) return entry.getKey();
+		}
+		return null;
+	}
 }
